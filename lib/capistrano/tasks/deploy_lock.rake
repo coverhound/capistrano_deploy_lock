@@ -123,7 +123,7 @@ namespace :deploy_lock do
       deploy_lock = fetch(:deploy_lock)
 
       if deploy_lock[:expire_at] && deploy_lock[:expire_at] < Time.now
-        info Capistrano::DeployLock.expired_message(fetch(:application), stage, deploy_lock)
+        info Capistrano::DeployLock.expired_message(fetch(:application), fetch(:stage), deploy_lock)
         remove_deploy_lock
         next
       end
@@ -132,7 +132,7 @@ namespace :deploy_lock do
       set :custom_deploy_lock, deploy_lock[:custom]
 
       # Unexpired lock is present, so display the lock message
-      warn Capistrano::DeployLock.message(fetch(:application), (respond_to?(:stage) ? stage : nil), deploy_lock)
+      warn Capistrano::DeployLock.message(fetch(:application), fetch(:stage), deploy_lock)
 
       # Don't raise exception if current user owns the lock, and lock has an expiry time.
       # Just sleep for a few seconds so they have a chance to cancel the deploy with Ctrl-C
