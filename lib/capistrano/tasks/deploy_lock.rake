@@ -163,10 +163,10 @@ namespace :deploy_lock do
       end
 
       # Refresh lock expiry time if it's going to expire
-      if deploy_lock[:expire_at] && deploy_lock[:expire_at] < (Time.now + default_lock_expiry)
+      if deploy_lock[:expire_at] && deploy_lock[:expire_at] < (Time.now + fetch(:default_lock_expiry))
         info "Resetting lock expiry to default..."
         deploy_lock[:username]  = ENV['USER']
-        deploy_lock[:expire_at] = (Time.now + default_lock_expiry).utc
+        deploy_lock[:expire_at] = (Time.now + fetch(:default_lock_expiry)).utc
 
         write_deploy_lock(deploy_lock)
       end
