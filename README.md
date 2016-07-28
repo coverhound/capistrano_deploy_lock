@@ -27,10 +27,10 @@ a message like this, and exit:
 ```
 *** Deploy locked 3 minutes ago by 'ndbroadbent'
 *** Message: Deploying master branch
-*** Expires in 12 minutes
+*** Expires in 7 minutes
 ```
 
-The default deploy lock will expire after 15 minutes. This is so that crashed or interrupted deploys don't leave a stale lock behind.
+The default deploy lock will expire after 10 minutes. This is so that crashed or interrupted deploys don't leave a stale lock behind.
 
 The following tasks will be run before deploy:
 
@@ -91,7 +91,7 @@ Refreshes the current lock's expiry time if it is less than the default time.
 
 ## Configuration
 
-If your deploys usually take longer than 15 minutes, you can configure the default expiry time with:
+If your deploys usually take longer than 10 minutes, you can configure the default expiry time with:
 
 ```ruby
 set :default_lock_expiry, (20 * 60)   # Sets the default expiry to 20 minutes
