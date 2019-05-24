@@ -136,7 +136,7 @@ namespace :deploy_lock do
 
       # Don't raise exception if current user owns the lock, and lock has an expiry time.
       # Just sleep for a few seconds so they have a chance to cancel the deploy with Ctrl-C
-      if deploy_lock[:expire_at] && deploy_lock[:username] == ENV['USER']
+      if deploy_lock[:expire_at] && deploy_lock[:username] == ENV['USER'] && ENV['USER'] != ENV['AUTOMATED_DEPLOY_USER']
         5.downto(1) do |i|
           Kernel.print "\rDeploy lock was created by you (#{ENV['USER']}). Continuing deploy in #{i}..."
           sleep 1
